@@ -144,8 +144,6 @@ const filtroPesquisaPalavraChave = function(number, palavraChave){
     return result
 }
 
-console.log(filtroPesquisaPalavraChave(11987876567, "me"))
-
 module.exports = {
     listarTodosDados,
     listarDadosProfileUser,
