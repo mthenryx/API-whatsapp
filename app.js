@@ -120,12 +120,12 @@ app.get("/v1/whatsapp/help", function(request, response){
             },
             {
                 "method": "GET",
-                "route": "/v1/whatsapp/user/:number/contacts",
+                "route": "/v1/whatsapp/user/contacts/:number",
                 "description": "Retorna todos os contatos de um usuário"
             },
             {
                 "method": "GET",
-                "route": "/v1/whatsapp/user/:number/conversations",
+                "route": "/v1/whatsapp/user/conversations/:number",
                 "description": "Retorna todas as conversas de um usuário"
             },
             {
@@ -135,7 +135,7 @@ app.get("/v1/whatsapp/help", function(request, response){
             },
             {
                 "method": "GET",
-                "route": "/v1/whatsapp/search?number=11987876567&keyword=palavra",
+                "route": "/v1/whatsapp/search?number=numero&keyword=palavra",
                 "description": "Busca mensagens por palavra-chave dentro das conversas de um usuário"
             }
         ]
