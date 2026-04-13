@@ -88,12 +88,12 @@ const listarMensagensTrocadas = function(number){
 const listarConversaUserContato = function(number, conversante){
     let result = false
     let numero = Number(number)
-    let contato = String(conversante)
+    let contato = String(conversante.toLocaleUpperCase())
 
     whatsapp.forEach(function(user){
         if(numero == user.number){
             user.contacts.forEach(function(pessoaDaConversa){
-                if(contato == pessoaDaConversa.name){
+                if(contato == pessoaDaConversa.name.toLocaleUpperCase()){
                     result = {
                         "usuario"          : user.nickname,
                         "numero"           : user.number,
@@ -112,13 +112,39 @@ const listarConversaUserContato = function(number, conversante){
 const filtroPesquisaPalavraChave = function(number, palavraChave){
     let result = false
     let numero = Number(number)
-    let contato = String(conversante)
+    let palavra = String(palavraChave).toLowerCase()
 
+    whatsapp.forEach(function(user){
+        if(numero == user.number){
+            result = {
+                "usuario": user.nickname,
+                "resultados": []
+            }
+
+            user.contacts.forEach(function(contato){
+
+                let mensagensFiltradas = []
+
+                contato.messages.forEach(function(msg){
+                    if(msg.content.toLowerCase().includes(palavra)){
+                        mensagensFiltradas.push(msg)
+                    }
+                })
+
+                if(mensagensFiltradas.length > 0){
+                    result.resultados.push({
+                        "contato": contato.name,
+                        "mensagens": mensagensFiltradas
+                    })
+                }
+            })
+        }
+    })
 
     return result
 }
 
-console.log(filtroPesquisaPalavraChave(11987876567, ))
+console.log(filtroPesquisaPalavraChave(11987876567, "me"))
 
 module.exports = {
     listarTodosDados,
@@ -126,4 +152,5 @@ module.exports = {
     listarContatoCadaUser,
     listarMensagensTrocadas,
     listarConversaUserContato,
+    filtroPesquisaPalavraChave
 }
